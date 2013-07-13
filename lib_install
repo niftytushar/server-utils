@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#lib_install - Install PHP and MySQL Packages for Find'n'Secure version 4
+#lib_install - Install various packages for setting up of FindnSecure version 4
 
 selection=
 
