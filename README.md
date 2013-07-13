@@ -17,3 +17,8 @@ Supported Methods:
 8) Install Synaptic Package Manager
 9) Install Axel
 0) Exit
+
+Installation:
+1) Download lib_install
+2) chmod u+x lib_install
+3) ./lib_install
