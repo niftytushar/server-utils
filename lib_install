@@ -1,0 +1,130 @@
+#!/bin/bash
+
+#lib_install - Install PHP and MySQL Packages for Find'n'Secure version 4
+
+selection=
+
+#You need to be root to install packages 
+if [ $(id -u) != "0" ]; then
+    echo "Permission denied. Are you root?"
+    exit 1
+fi
+
+usage()
+{
+echo "usage: lib_install [[-h]]"
+}
+
+#rebuild packages index from sources
+update_index()
+{
+sudo apt-get update
+echo "Packages index updated.";
+}
+
+#upgrade all existing packages
+upgrade_packages()
+{
+sudo apt-get upgrade
+echo "Upgrade complete."
+}
+
+#install php packages
+install_php_libs()
+{
+echo "Installing PHP packages..."
+sudo apt-get install -y php5 php5-dbg php5-dev php5-common php5-recode php5-ldap php5-pspell php5-snmp php5-curl php5-xsl php5-xmlrpc php5-gmp php5-gd php5-pgsql php5-odbc php5-cli php5-sqlite php5-cgi php5-tidy libapache2-mod-php5 php5-mysql
+echo "Installation of PHP packages complete."
+}
+
+#install MySQL Packages
+install_mysql_libs()
+{
+echo "Installing MySQL packages..."
+sudo apt-get install -y libdbd-mysql-perl libdbi-perl libmysqlclient-dev libmysqlclient18 librdf0 mysql-client mysql-client-5.5 mysql-client-core-5.5 mysql-common mysql-server mysql-server-5.5 mysql-server-core-5.5 rsyslog libmyodbc libmysql++-dev libmysql++3
+echo "Installation of MySQL packages complete."
+}
+
+#install XRDP
+install_xrdp()
+{
+echo "Installing XRDP..."
+sudo apt-get install -y xrdp
+echo "Installation of XRDP complete."
+}
+
+#install Ubuntu Desktop
+install_ubuntu_desktop()
+{
+echo "Installing Ubuntu Desktop..."
+sudo apt-get install -y ubuntu-desktop
+echo "Installation of Ubuntu Desktop complete."
+}
+
+#install Screen
+install_screen()
+{
+echo "Installing Screen..."
+#change to /home directory before starting
+cd $HOME
+
+#get customized screen version and save to screenrc
+wget spark-public.s3.amazonaws.com/startup/code/screenrc -O .screenrc
+
+echo "Installation of Screen complete."
+}
+
+#install synaptic package manager
+install_synaptic()
+{
+echo "Installing Synaptic Package Manager..."
+sudo apt-get install -y synaptic
+echo "Installation of Synaptic Package Manager complete."
+}
+
+#install axel
+install_axel()
+{
+echo "Installing Axel..."
+sudo apt-get install -y axel
+echo "Installation of Axel complete."
+}
+
+while [ "$1" != "" ]; do
+case $1 in
+-h | --help ) usage; exit;;
+esac
+shift
+done
+
+until [ "$selection" = "0" ]; do
+echo "
+1 - Update Packages Index
+2 - Upgrade Packages
+3 - Install PHP Packages
+4 - Install MySQL Packages
+5 - Install XRDP
+6 - Install Ubuntu Desktop
+7 - Install Screen
+8 - Install Synaptic Package Manager
+9 - Install Axel
+0 - Exit
+"
+echo -n "Enter Selection: "
+read selection
+echo ""
+
+case $selection in
+1 ) update_index ;;
+2 ) upgrade_packages ;;
+3 ) install_php_libs ;;
+4 ) install_mysql_libs ;;
+5 ) install_xrdp ;;
+6 ) install_ubuntu_desktop ;;
+7 ) install_screen ;;
+8 ) install_synaptic ;;
+9 ) install_axel ;;
+0 ) exit 0 ;;
+* ) echo "Invalid Input";
+esac
+done
