@@ -25,7 +25,7 @@ echo "Packages index updated.";
 #upgrade all existing packages
 upgrade_packages()
 {
-sudo apt-get upgrade
+sudo apt-get -y upgrade
 echo "Upgrade complete."
 }
 
@@ -90,6 +90,13 @@ sudo apt-get install -y axel
 echo "Installation of Axel complete."
 }
 
+#apply vnc license on Ubuntu, after VNC server has been installed
+apply_vnc_license()
+{
+echo "Applying VNC License..."
+vnclicense -add 6MG9J-XQNEM-MUBVR-4ZNSZ-2TMLA
+}
+
 while [ "$1" != "" ]; do
 case $1 in
 -h | --help ) usage; exit;;
@@ -108,6 +115,7 @@ echo "
 7 - Install Screen
 8 - Install Synaptic Package Manager
 9 - Install Axel
+10 - Apply VNC License
 0 - Exit
 "
 echo -n "Enter Selection: "
@@ -124,6 +132,7 @@ case $selection in
 7 ) install_screen ;;
 8 ) install_synaptic ;;
 9 ) install_axel ;;
+10 ) apply_vnc_license() ;;
 0 ) exit 0 ;;
 * ) echo "Invalid Input";
 esac
