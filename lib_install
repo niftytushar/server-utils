@@ -106,19 +106,33 @@ add_cron_jobs()
 echo "Adding CRON jobs..."
 
 #list CRON jobs
-job_1="0 */1 * * * wget -T 0 http://127.0.0.1/php/getpage.php?mode=autoHandler"
-job_2="0 0 1 * * mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -pembarc mysql"
+job_1='0 */1 * * * wget -T 0 http://127.0.0.1/php/getpage.php?mode=autoHandler'
+job_2='0 0 1 * * mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -pembarc mysql'
 
 #fetch all previous cron jobs
 crontab -l > cron_dump
 
-#add two new jobs
-echo $job_1 >> cron_dump
-echo $job_2 >> cron_dump
+dump_job_1=$(cat cron_dump | sed "s/\s[\*]*//g" | grep $(echo "$job_1" | sed "s/\s[\*]*//g"))
+if [ "$dump_job_1" = "" ]; then
+echo "$job_1" >> cron_dump
+echo "CRON job $job_1 added successfully."
+else
+echo "CRON job $job_1 already exists."
+fi
+
+dump_job_2=$(cat cron_dump | sed "s/\s[\*]*//g" | grep $(echo "$job_2" | sed "s/\s[\*]*//g"))
+if [ "$dump_job_2" = "" ]; then
+echo "$job_2" >> cron_dump
+echo "CRON job $job_2 added successfully."
+else 
+echo "CRON job $job_2 already exists."
+fi
+
+#debug
+cat cron_dump
 
 #add all jobs to crontab
 crontab cron_dump
-echo "CRON jobs added successfully."
 }
 
 #exit program neatly - exit housekeeping
