@@ -16,6 +16,8 @@ Supported Methods:
 7) Install screen
 8) Install Synaptic Package Manager
 9) Install Axel
+10) Apply VNC License
+11) Add CRON Jobs
 0) Exit
 
 Installation:
