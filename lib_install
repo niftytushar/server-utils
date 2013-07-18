@@ -10,6 +10,9 @@ if [ $(id -u) != "0" ]; then
     exit 1
 fi
 
+#exit neatly in any situation - except for SIGKILL from outer space
+trap clean_exit SIGHUP SIGINT SIGTERM
+
 usage()
 {
 echo "usage: lib_install [[-h]]"
@@ -97,6 +100,36 @@ echo "Applying VNC License..."
 vnclicense -add 6MG9J-XQNEM-MUBVR-4ZNSZ-2TMLA
 }
 
+#add Cron jobs
+add_cron_jobs()
+{
+echo "Adding CRON jobs..."
+
+#list CRON jobs
+job_1="0 */1 * * * wget -T 0 http://127.0.0.1/php/getpage.php?mode=autoHandler"
+job_2="0 0 1 * * mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -pembarc mysql"
+
+#fetch all previous cron jobs
+crontab -l > cron_dump
+
+#add two new jobs
+echo $job_1 >> cron_dump
+echo $job_2 >> cron_dump
+
+#add all jobs to crontab
+crontab cron_dump
+echo "CRON jobs added successfully."
+}
+
+#exit program neatly - exit housekeeping
+clean_exit()
+{
+if [ -f "cron_dump" ]; then
+rm -f cron_dump
+fi
+exit 0
+}
+
 while [ "$1" != "" ]; do
 case $1 in
 -h | --help ) usage; exit;;
@@ -116,6 +149,7 @@ echo "
 8 - Install Synaptic Package Manager
 9 - Install Axel
 10 - Apply VNC License
+11 - Add CRON Jobs
 0 - Exit
 "
 echo -n "Enter Selection: "
@@ -132,8 +166,9 @@ case $selection in
 7 ) install_screen ;;
 8 ) install_synaptic ;;
 9 ) install_axel ;;
-10 ) apply_vnc_license() ;;
-0 ) exit 0 ;;
+10 ) apply_vnc_license ;;
+11 ) add_cron_jobs ;;
+0 ) clean_exit ;;
 * ) echo "Invalid Input";
 esac
 done
