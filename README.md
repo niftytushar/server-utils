@@ -18,6 +18,7 @@ Supported Methods:
 9) Install Axel
 10) Apply VNC License
 11) Add CRON Jobs
+12) Start UNIX Firewall
 0) Exit
 
 Installation:
