@@ -128,11 +128,21 @@ else
 echo "CRON job $job_2 already exists."
 fi
 
-#debug
-cat cron_dump
-
 #add all jobs to crontab
 crontab cron_dump
+}
+
+#start UFW and allow optional required ports
+start_ufw()
+{
+echo "Starting UNIX Firewall..."
+ufw enable
+ufw allow 22
+ufw allow 80
+ufw allow 5901
+ufw allow 10000
+ufw allow 21000
+echo "UNIX Firewall started. Port Exceptions: 22,80,5901,10000,21000."
 }
 
 #exit program neatly - exit housekeeping
@@ -164,6 +174,7 @@ echo "
 9 - Install Axel
 10 - Apply VNC License
 11 - Add CRON Jobs
+12 - Start UNIX Firewall
 0 - Exit
 "
 echo -n "Enter Selection: "
@@ -182,6 +193,7 @@ case $selection in
 9 ) install_axel ;;
 10 ) apply_vnc_license ;;
 11 ) add_cron_jobs ;;
+12 ) start_ufw ;;
 0 ) clean_exit ;;
 * ) echo "Invalid Input";
 esac
