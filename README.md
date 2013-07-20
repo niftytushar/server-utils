@@ -19,6 +19,7 @@ Supported Methods:
 10) Apply VNC License
 11) Add CRON Jobs
 12) Start UNIX Firewall
+13) Enable Login using root (GNOME)
 0) Exit
 
 Installation:
