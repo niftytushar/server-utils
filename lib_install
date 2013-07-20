@@ -145,6 +145,14 @@ ufw allow 21000
 echo "UNIX Firewall started. Port Exceptions: 22,80,5901,10000,21000."
 }
 
+root_login_gnome()
+{
+echo "Enabling root login..."
+sudo sh -c 'echo "greeter-show-manual-login = true" >> /etc/lightdm/lightdm.conf'
+sudo sh -c 'echo "allow-guest = false" >> /etc/lightdm/lightdm.conf'
+echo "Root login enabled."
+}
+
 #exit program neatly - exit housekeeping
 clean_exit()
 {
@@ -175,6 +183,7 @@ echo "
 10 - Apply VNC License
 11 - Add CRON Jobs
 12 - Start UNIX Firewall
+13 - Enable Login using root (GNOME)
 0 - Exit
 "
 echo -n "Enter Selection: "
@@ -194,6 +203,7 @@ case $selection in
 10 ) apply_vnc_license ;;
 11 ) add_cron_jobs ;;
 12 ) start_ufw ;;
+13 ) root_login_gnome ;;
 0 ) clean_exit ;;
 * ) echo "Invalid Input";
 esac
