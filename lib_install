@@ -145,12 +145,23 @@ ufw allow 21000
 echo "UNIX Firewall started. Port Exceptions: 22,80,5901,10000,21000."
 }
 
+#enable root login in GNOME mode
 root_login_gnome()
 {
 echo "Enabling root login..."
 sudo sh -c 'echo "greeter-show-manual-login = true" >> /etc/lightdm/lightdm.conf'
 sudo sh -c 'echo "allow-guest = false" >> /etc/lightdm/lightdm.conf'
 echo "Root login enabled."
+}
+
+#create databases, required for FindnSecure v4
+create_databases()
+{
+echo "Creating databases..."
+echo "create database fnsv4;" > db_create.sql
+echo "create database fnsraw;" >> db_create.sql
+echo "create database geofnsv4.sql;" >> db_create.sql
+echo "Databases created."
 }
 
 #exit program neatly - exit housekeeping
@@ -184,6 +195,7 @@ echo "
 11 - Add CRON Jobs
 12 - Start UNIX Firewall
 13 - Enable Login using root (GNOME)
+14 - Create Databases
 0 - Exit
 "
 echo -n "Enter Selection: "
@@ -204,6 +216,7 @@ case $selection in
 11 ) add_cron_jobs ;;
 12 ) start_ufw ;;
 13 ) root_login_gnome ;;
+14 ) create_databases ;;
 0 ) clean_exit ;;
 * ) echo "Invalid Input";
 esac
