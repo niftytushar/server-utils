@@ -20,6 +20,8 @@ Supported Methods:
 11) Add CRON Jobs
 12) Start UNIX Firewall
 13) Enable Login using root (GNOME)
+14) Create Databases
+15) Upgrade Linux Distribution
 0) Exit
 
 Installation:
