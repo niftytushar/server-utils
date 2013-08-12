@@ -158,9 +158,31 @@ echo "Root login enabled."
 create_databases()
 {
 echo "Creating databases..."
-echo "create database fnsv4;" > db_create.sql
-echo "create database fnsraw;" >> db_create.sql
-echo "create database geofnsv4.sql;" >> db_create.sql
+echo "CREATE DATABASE IF NOT EXISTS fnsv4;" > db_create.sql
+echo "CREATE DATABASE IF NOT EXISTS fnsraw;" >> db_create.sql
+echo "CREATE DATABASE IF NOT EXISTS geofnsv4;" >> db_create.sql
+
+#prompt for mysql username and password
+username=""
+password=""
+echo -n "Please enter MySQL username:"
+read username
+
+#if username is not entered, assume root
+if [ "$username" = "" ]; then
+username="root"
+echo "No username provided, assuming user root."
+fi
+
+echo ""
+
+echo -n "Please enter MySQL password:"
+#reading password in silent mode, so that password characters are not echoed back on screen
+read -s password
+echo ""
+#no check for password supplied is available yet
+
+$(mysql -u"$username" -p"$password" < db_create.sql)
 
 echo "Databases created."
 }
@@ -176,8 +198,14 @@ echo "Linux distribution upgraded successfully."
 #exit program neatly - exit housekeeping
 clean_exit()
 {
+#remove file created by method add_cron_jobs
 if [ -f "cron_dump" ]; then
 rm -f cron_dump
+fi
+
+#remove file created by method create_databases
+if [ -f "db_create.sql" ]; then
+rm -f db_create.sql
 fi
 exit 0
 }
