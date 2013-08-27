@@ -1,12 +1,12 @@
-server-utils
+# server-utils
 ============
 
-#lib_install - Install various packages for setting up of FindnSecure version 4
+lib_install - Install various packages for setting up of FindnSecure version 4
 
-Usage:
+## Usage:
 lib_install [[-h]]
 
-Supported Methods:
+## Supported Methods:
 1) Update Packages Index
 2) Upgrade Packages
 3) Install PHP Packages
@@ -24,7 +24,7 @@ Supported Methods:
 15) Upgrade Linux Distribution
 0) Exit
 
-Installation:
+## Installation:
 1) Download lib_install
 2) chmod u+x lib_install
 3) ./lib_install
