@@ -1,12 +1,14 @@
 # server-utils
-============
 
-lib_install - Install various packages for setting up of FindnSecure version 4
+quick server setup for Find'n'Secure version 4
 
 ## Usage:
-lib_install [[-h]]
+```./lib_install```
 
-## Supported Methods:
+##Help
+```lib_install [[-h]]```
+
+## Features:
 1) Update Packages Index
 2) Upgrade Packages
 3) Install PHP Packages
