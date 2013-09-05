@@ -4,12 +4,7 @@ quick server setup for Find'n'Secure version 4
 
 ## Usage
 ```
-./lib_install
-```
-
-##Help
-```
-lib_install [[-h]]
+./lib_install [[-h]]
 ```
 
 ## Features
@@ -28,7 +23,6 @@ lib_install [[-h]]
 13. Enable Login using root (GNOME)
 14. Create Databases
 15. Upgrade Linux Distribution
-0. Exit
 
 ## Installation
 * Download server-utils and extract to folder
