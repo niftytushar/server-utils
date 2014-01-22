@@ -108,6 +108,7 @@ echo "Adding CRON jobs..."
 #list CRON jobs
 job_1='0 */1 * * * wget -T 0 http://127.0.0.1/php/getpage.php?mode=autoHandler'
 job_2='0 0 1 * * mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -pembarc mysql'
+job_3='0 0 * * * php /var/www/php/updateOdometer.php'
 
 #fetch all previous cron jobs
 crontab -l > cron_dump
@@ -126,6 +127,14 @@ echo "$job_2" >> cron_dump
 echo "CRON job $job_2 added successfully."
 else 
 echo "CRON job $job_2 already exists."
+fi
+
+dump_job_3=$(cat cron_dump | sed "s/\s[\*]*//g" | grep $(echo "$job_3" | sed "s/\s[\*]*//g"))
+if [ "$dump_job_3" = "" ]; then
+echo "$job_3" >> cron_dump
+echo "CRON job $job_3 added successfully."
+else 
+echo "CRON job $job_3 already exists."
 fi
 
 #add all jobs to crontab
