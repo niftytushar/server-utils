@@ -23,6 +23,7 @@ quick server setup for Find'n'Secure version 4
 13. Enable Login using root (GNOME)
 14. Create Databases
 15. Upgrade Linux Distribution
+16. Install phpMyAdmin
 
 ## Installation
 * Download server-utils and extract to folder
