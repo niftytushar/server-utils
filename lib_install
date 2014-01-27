@@ -106,7 +106,7 @@ add_cron_jobs()
 echo "Adding CRON jobs..."
 
 #list CRON jobs
-job_1='0 */1 * * * wget -T 0 http://127.0.0.1/php/getpage.php?mode=autoHandler'
+job_1='0 * * * * wget -T 0 http://127.0.0.1/php/getpage.php?mode=autoHandler'
 job_2='0 0 1 * * mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -pembarc mysql'
 job_3='0 0 * * * php /var/www/php/updateOdometer.php'
 
