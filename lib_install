@@ -204,7 +204,8 @@ sudo apt-get -y dist-upgrade
 echo "Linux distribution upgraded successfully."
 }
 
-# install_phpMyAdmin()
+# install phpMyAdmin
+install_phpMyAdmin()
 {
 echo "Starting installation of phpMyAdmin..."
 sudo apt-get install phpmyadmin
