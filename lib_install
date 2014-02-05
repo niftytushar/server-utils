@@ -208,7 +208,7 @@ echo "Linux distribution upgraded successfully."
 install_phpMyAdmin()
 {
 echo "Starting installation of phpMyAdmin..."
-sudo apt-get install phpmyadmin
+sudo apt-get install -y phpmyadmin
 echo "phpMyAdmin was installed successfully.\nRestarting Apache2 server now..."
 sudo service apache2 restart
 echo "Apache2 server was restarted successfully."
