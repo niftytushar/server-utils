@@ -224,6 +224,14 @@ sudo service apache2 restart
 echo "Apache2 server was restarted successfully."
 }
 
+# install apache2
+install_apache2()
+{
+echo "Starting installation of apache server..."
+sudo apt-get install -y apache2
+echo "Apache2 server was installed successfully.";
+}
+
 #exit program neatly - exit housekeeping
 clean_exit()
 {
@@ -264,6 +272,7 @@ echo "
 14 - Create Databases
 15 - Upgrade Linux Distribution
 16 - Install phpMyAdmin
+17 - Install Apache Server
 0 - Exit
 "
 echo -n "Enter Selection: "
@@ -287,6 +296,7 @@ case $selection in
 14 ) create_databases ;;
 15 ) upgrade_dist ;;
 16 ) install_phpMyAdmin ;;
+17 ) install_apache2 ;;
 0 ) clean_exit ;;
 * ) echo "Invalid Input";
 esac
