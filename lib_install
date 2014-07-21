@@ -218,7 +218,7 @@ install_phpMyAdmin()
 {
 echo "Starting installation of phpMyAdmin..."
 sudo apt-get install -y phpmyadmin
-sudo sh -c 'echo "Include /etc/phpmyadmin/apache.conf" >> /etc/apache2/apache2.conf'
+sudo 'echo "Include /etc/phpmyadmin/apache.conf" >> /etc/apache2/apache2.conf'
 echo "phpMyAdmin was installed successfully.\nRestarting Apache2 server now..."
 sudo service apache2 restart
 echo "Apache2 server was restarted successfully."
