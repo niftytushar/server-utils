@@ -261,6 +261,13 @@ sudo npm install -gy bower
 echo "Bower installed successfully."
 }
 
+install_grunt()
+{
+echo "Starting installation of Grunt..."
+sudo npm install -gy grunt-cli
+echo "Grunt installed successfully."
+}
+
 #exit program neatly - exit housekeeping
 clean_exit()
 {
@@ -305,6 +312,7 @@ echo "
 18 - Install NPM and node.js
 19 - Install CoffeeScript
 20 - Install Bower
+21 - Install Grunt
 0 - Exit
 "
 echo -n "Enter Selection: "
@@ -332,6 +340,7 @@ case $selection in
 18 ) install_npm_node ;;
 19 ) install_coffeescript ;;
 20 ) install_bower ;;
+21 ) install_grunt ;;
 0 ) clean_exit ;;
 * ) echo "Invalid Input";
 esac
