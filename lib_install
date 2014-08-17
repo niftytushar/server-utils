@@ -246,6 +246,14 @@ sudo apt-get install -y nodejs
 echo "NPM and nodejs installed successfully."
 }
 
+# install coffeescript
+install_coffeescript()
+{
+echo "Starting installation of coffee script..."
+sudo npm install -gy coffee-script
+echo "CoffeeScript installed successfully."
+}
+
 #exit program neatly - exit housekeeping
 clean_exit()
 {
@@ -288,6 +296,7 @@ echo "
 16 - Install phpMyAdmin
 17 - Install Apache Server
 18 - Install NPM and node.js
+19 - Install CoffeeScript
 0 - Exit
 "
 echo -n "Enter Selection: "
@@ -313,6 +322,7 @@ case $selection in
 16 ) install_phpMyAdmin ;;
 17 ) install_apache2 ;;
 18 ) install_npm_node ;;
+19 ) install_coffeescript ;;
 0 ) clean_exit ;;
 * ) echo "Invalid Input";
 esac
