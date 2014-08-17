@@ -218,7 +218,7 @@ install_phpMyAdmin()
 {
 echo "Starting installation of phpMyAdmin..."
 sudo apt-get install -y phpmyadmin
-sudo 'echo "Include /etc/phpmyadmin/apache.conf" >> /etc/apache2/apache2.conf'
+sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-enabled/phpmyadmin.conf
 echo "phpMyAdmin was installed successfully.\nRestarting Apache2 server now..."
 sudo service apache2 restart
 echo "Apache2 server was restarted successfully."
@@ -229,7 +229,21 @@ install_apache2()
 {
 echo "Starting installation of apache server..."
 sudo apt-get install -y apache2
-echo "Apache2 server was installed successfully.";
+echo "Apache2 server was installed successfully."
+}
+
+# install node and npm
+install_npm_node()
+{
+echo "Installing dependencies..."
+sudo apt-get install -y python-software-properties python g++ make
+echo "Add a new repository for apt-get to search."
+sudo add-apt-repository ppa:chris-lea/node.js
+echo "Update packages index."
+update_index
+echo "Installing nodejs and npm"
+sudo apt-get install -y nodejs
+echo "NPM and nodejs installed successfully."
 }
 
 #exit program neatly - exit housekeeping
@@ -273,6 +287,7 @@ echo "
 15 - Upgrade Linux Distribution
 16 - Install phpMyAdmin
 17 - Install Apache Server
+18 - Install NPM and node.js
 0 - Exit
 "
 echo -n "Enter Selection: "
@@ -297,6 +312,7 @@ case $selection in
 15 ) upgrade_dist ;;
 16 ) install_phpMyAdmin ;;
 17 ) install_apache2 ;;
+18 ) install_npm_node ;;
 0 ) clean_exit ;;
 * ) echo "Invalid Input";
 esac
